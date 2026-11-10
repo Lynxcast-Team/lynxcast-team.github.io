@@ -1,8 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Chakra+Petch:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap');
-:root{--bg:#111210;--panel:#191A17;--line:#2A2B26;--text:#ECEBE3;--dim:#A3A396;--gold:#E3C866}
+@import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap');
+:root{--bg:#09090A;--panel:#131315;--line:#242427;--text:#EDEDEF;--dim:#9C9CA4;--gold:#E3C866}
 *{box-sizing:border-box}
 html{background:var(--bg)}
-body{margin:0;color:var(--text);font:400 17px/1.6 'Barlow',system-ui,sans-serif}
+body{margin:0;color:var(--text);font:400 16px/1.65 'IBM Plex Sans',system-ui,sans-serif}
 a{color:var(--gold)}
 .wrap{max-width:860px;margin:0 auto;padding:0 20px}
 header{border-bottom:1px solid var(--line)}
