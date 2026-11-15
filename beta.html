@@ -32,6 +32,9 @@ button:disabled{opacity:.6;cursor:default}
 .msg.bad{border-left:3px solid #E5484D}
 .small{font-size:14px;color:var(--dim)}
 @media (max-width:600px){.row2{grid-template-columns:1fr}}
+.beta-wait #beta-open{visibility:hidden}
+a.card.soc{text-decoration:none;color:var(--text);display:block}
+a.card.soc:hover{border-color:var(--gold)}
 </style>
 </head>
 <body>
@@ -41,6 +44,7 @@ button:disabled{opacity:.6;cursor:default}
 </div></header>
 
 <main class="wrap">
+<div id="beta-open">
   <p class="eyebrow">Early access</p>
   <h1>Get in early</h1>
   <p class="lead">Lynxcast isn't out yet, but we are letting streamers in early to test the app to polish it and help shape it. Made by streamers, for streamers.</p>
@@ -70,6 +74,20 @@ button:disabled{opacity:.6;cursor:default}
 
   <h2>Need to know</h2>
   <p>Lynxcast is a Windows app for Twitch, Kick and YouTube. Beta builds can and mostly will have bugs, that's the whole point. So tell us when something breaks. Your login stays on your PC like promised.</p>
+</div>
+
+<div id="beta-closed" hidden>
+  <p class="eyebrow">Early access</p>
+  <h1 id="closed-title">Doors are shut (for now)</h1>
+  <p class="lead" id="closed-msg"></p>
+  <div class="rule"></div>
+  <h2>Keep up with it</h2>
+  <div class="grid">
+    <a class="card soc" href="https://twitch.tv/coltkings"><b>Twitch</b><span>twitch.tv/coltkings, where updates get announced first</span></a>
+    <a class="card soc" href="https://youtube.com/@Mehboii"><b>YouTube</b><span>@Mehboii</span></a>
+    <a class="card soc" href="./"><b>Lynxcast</b><span>Back to the home page</span></a>
+  </div>
+</div>
 </main>
 
 <footer><div class="wrap">
@@ -95,5 +113,6 @@ f.addEventListener('submit', async (e) => {
   } catch (err) { show(false, err.message); go.disabled = false; go.textContent = 'Apply for early access'; }
 });
 </script>
+<script src="beta-status.js"></script>
 </body>
 </html>
