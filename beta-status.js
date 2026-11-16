@@ -7,7 +7,7 @@
   var done = function () { document.documentElement.classList.remove('beta-wait'); };
   setTimeout(done, 3000);   // server slow? show the normal page
   fetch('https://squad-redeems-relay.coltkings.workers.dev/beta/status').then(function (r) { return r.json(); }).then(function (s) {
-    if (s.mode === 'ended') document.querySelectorAll('nav a[href="beta.html"], a.cta[href="beta.html"]').forEach(function (a) { a.remove(); });
+    if (s.mode === 'ended') document.querySelectorAll('nav a[href="beta"], a.cta[href="beta"]').forEach(function (a) { a.remove(); });
     if (page && (s.mode === 'paused' || s.mode === 'ended')) {
       var shut = document.getElementById('beta-closed');
       document.getElementById('closed-title').textContent = s.mode === 'ended' ? "That's a wrap" : 'Doors are shut (for now)';
