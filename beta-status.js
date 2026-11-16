@@ -2,6 +2,10 @@
 // ended: the Beta tab and the "Get early access" button disappear from every page.
 // paused or ended: the beta page shows the message instead of the form.
 (function () {
+  // old links / browser history with .html: tidy the address bar to the clean version (no reload)
+  if (/\.html$/.test(location.pathname) && !/google/.test(location.pathname)) {
+    try { history.replaceState(null, '', location.pathname.replace(/\/index\.html$/, '/').replace(/\.html$/, '') + location.search + location.hash); } catch (e) { /* ignore */ }
+  }
   var page = document.getElementById('beta-open');
   if (page) document.documentElement.classList.add('beta-wait');
   var done = function () { document.documentElement.classList.remove('beta-wait'); };
