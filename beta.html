@@ -25,6 +25,9 @@ textarea{min-height:90px;resize:vertical}
 input:focus,select:focus,textarea:focus{outline:2px solid var(--gold);outline-offset:-1px}
 .row2{display:grid;grid-template-columns:140px 1fr;gap:12px}
 .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.go-row{display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px}
+label.tick{display:flex;align-items:center;gap:10px;font:500 15px 'IBM Plex Sans',sans-serif;letter-spacing:0;text-transform:none;color:var(--text);cursor:pointer}
+label.tick input{width:18px;height:18px;padding:0;accent-color:var(--gold);cursor:pointer}
 button{justify-self:start;font:700 15px 'Chakra Petch',sans-serif;letter-spacing:.14em;text-transform:uppercase;background:var(--gold);color:#111;border:0;padding:14px 26px;cursor:pointer}
 button:disabled{opacity:.6;cursor:default}
 .msg{padding:14px 18px;border:1px solid var(--line);background:var(--panel)}
@@ -67,7 +70,11 @@ a.card.soc:hover{border-color:var(--gold)}
     <label>What do you stream?<textarea name="streams" maxlength="300" placeholder="Games, vibe, how often you go live"></textarea></label>
     <label>Average viewers<select name="viewers"><option value="">Pick one</option><option>Just starting</option><option>1-10</option><option>10-50</option><option>50-200</option><option>200+</option></select></label>
     <label class="hp" aria-hidden="true">Website<input name="website" tabindex="-1" autocomplete="off"></label>
-    <button id="go" type="submit">Apply for early access</button>
+    <label id="modbox" hidden>Streamer you mod for<input name="modFor" maxlength="80" placeholder="Their Twitch or Kick channel name" autocomplete="off"></label>
+    <div class="go-row">
+      <button id="go" type="submit">Apply for early access</button>
+      <label class="tick"><input type="checkbox" name="mod" id="mod"> I'm a mod for a streamer</label>
+    </div>
     <div id="out" class="msg" hidden role="status"></div>
     <p class="small">We only use this to look at your application and get back to you. It is kept until the beta ends and will not be shared or sold. Details in the <a href="privacy#beta">privacy policy</a>.</p>
   </form>
@@ -97,9 +104,12 @@ a.card.soc:hover{border-color:var(--gold)}
 <script>
 const f = document.getElementById('f'), out = document.getElementById('out'), go = document.getElementById('go');
 const show = (ok, text) => { out.hidden = false; out.className = 'msg ' + (ok ? 'ok' : 'bad'); out.textContent = text; };
+document.getElementById('mod').addEventListener('change', (e) => { const box = document.getElementById('modbox'); box.hidden = !e.target.checked; if (e.target.checked) box.querySelector('input').focus(); });
 f.addEventListener('submit', async (e) => {
   e.preventDefault();
   const d = Object.fromEntries(new FormData(f));
+  d.mod = document.getElementById('mod').checked;
+  if (d.mod && !String(d.modFor || '').trim()) return show(false, 'Type the streamer you mod for.');
   if (!d.name.trim()) return show(false, 'Add your channel name.');
   if (!d.discord.trim()) return show(false, 'Add your Discord username so we can reach you.');
   go.disabled = true; go.textContent = 'Sending…';
